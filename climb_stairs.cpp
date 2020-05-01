@@ -32,9 +32,8 @@ void waysToClimb(int total_steps, std::vector<unsigned>& current)
   {
     int new_val = total_steps - Steps[i];
     if (new_val >= 0) {
-      auto new_total = total_steps - Steps[i];
       current.push_back(Steps[i]);
-      waysToClimb(new_total, current);
+      waysToClimb(new_val, current);
       current.pop_back();
     }
   }
