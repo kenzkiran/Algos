@@ -192,27 +192,46 @@ void InsertASortedArray(std::vector<int>& arr, int start, int end) {
   InsertASortedArray(arr, middle + 1, end);
 }
 
-int main() {
-  // root = Insert(15);
-  // auto n1 = Insert(6);
-  // auto n2 = Insert(18);
-  // auto n3 = Insert(3);
-  // auto n4 = Insert(7);
-  // Insert(17);
-  // Insert(20);
-  // Insert(2);
-  // Insert(4);
-  // auto n13 = Insert(13);
-  // auto n9 = Insert(9);
+int last_key = std::numeric_limits<int>::min();
+bool CheckInOrder(Node* n) {
+  if (n == nullptr) {
+    return true;
+  }
+  if (CheckInOrder(n->left)) {
+    if (n->key < last_key) {
+      cout <<"Offending key: "<<n->key<<endl;
+      return false;
+    } 
+    last_key = n->key;
+    return CheckInOrder(n->right);
+  }
+  return false;
+}
 
+int main() {
+  root = Insert(15);
+  auto n1 = Insert(6);
+  auto n2 = Insert(18);
+  auto n3 = Insert(3);
+  auto n4 = Insert(7);
+  Insert(17);
+  Insert(20);
+  Insert(2);
+  Insert(4);
+  auto n13 = Insert(13);
+  auto n9 = Insert(9);
+  InOrderWalk(root);
+  cout<<endl;
+  root->key = 2;
+  CheckInOrder(root);
   // // dumpNode(n9);
   // // auto n = TreeSuccessor(n9);
   // // cout << "Successor of " << (n9->key) << " is " << (n->key) << endl;
   // DeleteNode(root);
 
-  std::vector<int> sorted = {1,2,3,4,5,6,7,8,9,10};
-  InsertASortedArray(sorted, 0, sorted.size() - 1);
-  InOrderWalk(root);
+  // std::vector<int> sorted = {1,2,3,4,5,6,7,8,9,10};
+  // InsertASortedArray(sorted, 0, sorted.size() - 1);
+  
   cout << endl;
   dumpNode(root);
 }

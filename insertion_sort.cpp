@@ -26,16 +26,15 @@ Note: No Error checking:
  * If array is valid (not null)
 */
 void insertion_sort(int *arr, int len) {
-
-  for (int j = 2; j < len; ++j) {
-    for (int i = j - 1; i >= 0 && arr[i + 1] < arr[i]; --i) {
-      /* Swap arr[i] with arr[i+1] */
-      int temp = arr[i + 1];
-      arr[i + 1] = arr[i];
-      arr[i] = temp;
+  for (auto i = 1; i < len; ++i) {
+    for (auto j = i - 1; j >= 0; --j) {
+      if (arr[j + 1] < arr[j]) {
+        auto temp = arr[j + 1];
+        arr[j + 1] = arr[j];
+        arr[j] = temp;
+      }
     }
   }
-
   dump(arr, len);
 }
 
@@ -60,9 +59,9 @@ void insertion_sort_stl(std::vector<int> &arr) {
 }
 
 int main() {
-  int array[] = {7, 6, 5, 4, 3, 2, 1};
+  int array[] = { 8, 7, 6, 5, 4, 1, 2};
   int len = sizeof(array) / sizeof(int);
-  std::vector<int> new_input = {7, 6, 5};
+  std::vector<int> new_input = {5, 2, 4, 6, 1, 3};
   insertion_sort(array, len);
   insertion_sort_stl(new_input);
   dumpVector(new_input);
